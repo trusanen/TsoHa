@@ -18,9 +18,9 @@
             <fieldset>
                 <legend>Kirjaudu sisään</legend>
                 <label for="userId">Käyttäjätunnus:</label>
-                <input type="text" name="userId" id="ui" /><br>
+                <input type="text" name="un" /><br>
                 <label for="password">Salasana:</label>
-                <input type="password" name="password" id="pw" /><br>
+                <input type="password" name="pw" /><br>
                 <input type="submit" value="Kirjaudu" />
             </fieldset>
         </form>

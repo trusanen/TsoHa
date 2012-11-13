@@ -13,21 +13,23 @@ import queries.UserQuery;
  */
 public class User {
     
-    int id;
+    private int id;
     
     public User(int id) {
         this.id = id;
     }
     
-    public void loginUser(String name, String password) throws ClassNotFoundException, SQLException {
+    public int getId() {
+        return id;
+    }
+    
+    public static User loginUser(String name, String password) throws ClassNotFoundException, SQLException {
         
         UserQuery q = new UserQuery();
         
-        User newUser = q.getUser(name);
+        User newUser = q.getUser(name, password);
         
-        if(!(newUser == null)) {
-            
-        }
+        return newUser;
     }
     
 }
