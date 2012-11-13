@@ -1,26 +1,34 @@
-CREATE TABLE kayttaja
+CREATE TABLE Kayttaja
 (
-kayttajaKey int NOT NULL PRIMARY KEY,
-nimi varchar(255) NOT NULL,
-liittynytPVM date NOT NULL,
-)
-CREATE TABLE tapahtuma
+kayttajaKey serial NOT NULL PRIMARY KEY,
+kayttajaNimi varchar NOT NULL UNIQUE,
+salasana varchar NOT NULL,
+nimi varchar NOT NULL,
+liittynytPVM date NOT NULL
+);
+
+CREATE TABLE Tapahtuma
 (
-tapahtumaKey int NOT NULL PRIMARY KEY,
-nimi varchar(255) NOT NULL,
+tapahtumaKey serial NOT NULL PRIMARY KEY,
+luonut int references Kayttaja(kayttajaKey),
 luotuPVM date NOT NULL,
-luonut FOREIGN KEY REFERENCES kayttaja(kayttajaKey)
-)
-CREATE TABLE ilmoittaumiset
+nimi varchar NOT NULL,
+tiedot text
+);
+
+CREATE TABLE Ilmoittautumiset
 (
-kayttajaKey FOREIGN KEY REFERENCES kayttaja(kayttajaKey),
-tapahtumaKey FOREIGN KEY REFERENCES tapahtuma(tapahtumaKey)
-)
-CREATE TABLE kommentti
+ilmoittautunut int references Kayttaja(kayttajaKey),
+tapahtuma int references Tapahtuma(tapahtumaKey),
+ilmoittautumisPVM date
+);
+
+CREATE TABLE Kommentti
 (
-kommenttiKey int NOT NULL PRIMARY KEY,
-teksti varchar(255) NOT NULL,
-kommentoinut FOREIGN KEY REFERENCES kayttaja(kayttajaKey),
-tapahtumaKey FOREIGN KEY REFERENCES tapahtuma(tapahtumaKey)
-)
+kommenttiKey serial NOT NULL,
+kommentoija int references Kayttaja(kayttajaKey),
+tapahtuma int references Tapahtuma(tapahtumaKey),
+kommenttiPVM date,
+teksti varchar NOT NULL
+);
 
