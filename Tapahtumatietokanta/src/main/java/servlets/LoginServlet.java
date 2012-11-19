@@ -40,16 +40,15 @@ public class LoginServlet extends HttpServlet {
         
         HttpSession session = request.getSession(true);
         
-        String userName = request.getParameter("un");
+        String username = request.getParameter("un");
         String password = request.getParameter("pw");
         
-        if(userName != null && password != null) {
-            User newUser = User.loginUser(userName, password);
+        if(username != null && password != null) {
+            User newUser = User.loginUser(username, password);
 
             if(!(newUser == null)) {
-                session.setAttribute("userId", newUser.getId());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("userPage.jsp");
-                dispatcher.forward(request, response);
+                session.setAttribute("user", newUser);
+                response.sendRedirect("userPage.jsp");
             }
             else {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("testi.jsp");

@@ -1,4 +1,4 @@
-CREATE TABLE UserData
+CREATE TABLE Users
 (
 userKey serial NOT NULL PRIMARY KEY,
 userName varchar NOT NULL UNIQUE,
@@ -7,7 +7,7 @@ name varchar NOT NULL,
 joinDate date NOT NULL
 );
 
-CREATE TABLE Event
+CREATE TABLE Events
 (
 eventKey serial NOT NULL PRIMARY KEY,
 createdBy int references UserData(userKey),
@@ -18,7 +18,7 @@ information text
 
 CREATE TABLE Attendees
 (
-Attends int references UserData(userKey),
+attends int references UserData(userKey),
 event int references Event(eventKey),
 joinDate date
 );
@@ -28,7 +28,7 @@ CREATE TABLE Comments
 commentKey serial NOT NULL,
 commentedBy int references UserData(userKey),
 event int references Event(eventKey),
-CommentedDate date,
+commentedDate date,
 text varchar NOT NULL
 );
 
