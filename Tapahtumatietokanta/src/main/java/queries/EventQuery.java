@@ -44,7 +44,7 @@ public class EventQuery extends DatabaseConnection {
         
         ArrayList<Event> userEvents = new ArrayList<Event>();
         
-        PreparedStatement st = conn.prepareStatement("SELECT eventKey, name FROM Event WHERE createdBy = ?");
+        PreparedStatement st = conn.prepareStatement("SELECT eventKey, name FROM Events WHERE createdBy = ?");
         st.setInt(1, userId);
         
         ResultSet rs = st.executeQuery();
@@ -67,7 +67,7 @@ public class EventQuery extends DatabaseConnection {
         PreparedStatement st = conn.prepareStatement(
                 "SELECT eventKey, name "
                 + "FROM Attendees "
-                + "INNER JOIN Event "
+                + "INNER JOIN Events "
                 + "ON event = eventKey "
                 + "WHERE attends = ?");
         st.setInt(1, userId);

@@ -22,7 +22,7 @@ public class UserQuery extends DatabaseConnection {
     
     public User getUser(String name, String password) throws SQLException {
         
-        PreparedStatement st = conn.prepareStatement("SELECT userKey, name FROM UserData WHERE userName = ? AND password = ?");
+        PreparedStatement st = conn.prepareStatement("SELECT userKey, name FROM Users WHERE userName = ? AND password = ?");
         st.setString(1, name);
         st.setString(2, password);
         
