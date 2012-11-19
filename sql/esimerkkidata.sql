@@ -11,4 +11,5 @@ INSERT INTO Comments VALUES
 
 INSERT INTO Attendees VALUES
 (1, 1, NOW()),
-(2, 1, NOW());
+(2, 1, NOW()),
+(1, 2, NOW());

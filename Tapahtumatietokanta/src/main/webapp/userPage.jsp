@@ -13,7 +13,7 @@
         Events created by you:<br>
         <c:choose>
             <c:when test="${empty user.createdEvents}">
-                You haven't created any events!
+                <br>You haven't created any events!<br><br>
             </c:when>
             <c:otherwise>
                 <ul>
@@ -28,7 +28,7 @@
         
         <c:choose>
             <c:when test="${empty user.attendedEvents}">
-                You aren't attending any events!
+                <br>You aren't attending any events!<br><br>
             </c:when>
             <c:otherwise>
                 <ul>
