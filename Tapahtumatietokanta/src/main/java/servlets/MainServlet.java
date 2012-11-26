@@ -40,7 +40,9 @@ public class MainServlet extends HttpServlet {
             request.setAttribute("user", user);
             return true;
         }
-        response.sendRedirect("loginpage.jsp");
+
+        response.sendRedirect("login");
+        
         return false;
     }
     
