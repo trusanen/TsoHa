@@ -51,4 +51,5 @@ public class EventPageServlet extends MainServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
+
 }
