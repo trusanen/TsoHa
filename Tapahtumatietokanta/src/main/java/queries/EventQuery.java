@@ -17,34 +17,52 @@ public class EventQuery extends DatabaseConnection {
         super();
     }
     
-    public Event getEvent(String name, String password) throws SQLException {
+    public Event getEvent(String key) throws SQLException {
         
-        PreparedStatement st = conn.prepareStatement("SELECT eventKey, name FROM UserData WHERE userName = ? AND password = ?");
-        st.setString(1, name);
-        st.setString(2, password);
+        PreparedStatement st = conn.prepareStatement("SELECT eventKey, name, createdBy FROM Events WHERE eventKey = ?");
+        st.setString(1, key);
         
         ResultSet rs = st.executeQuery();
         Event event = null;
         
         if(rs.next()) {
-            event = new Event(rs.getLong("eventKey"), rs.getString("name"));
+            event = new Event(rs.getLong("eventKey"), rs.getString("name"), rs.getLong("createdBy"));
         }
         
         conn.close();
         return event;
     }
     
+    public String getEventInformation(long key) throws SQLException {
+        
+        PreparedStatement st = conn.prepareStatement("SELECT information FROM Events WHERE eventKey = ?");
+        st.setLong(1, key);
+        
+        ResultSet rs = st.executeQuery();
+        
+        if(rs.next()) {
+            String info = rs.getString(1);
+            rs.close();
+            return info;
+        }
+        else {
+            rs.close();
+            return "";
+        }
+    }
+    
     public ArrayList<Event> getEventsCreatedByUser(long userId) throws SQLException {
         
         ArrayList<Event> userEvents = new ArrayList<Event>();
         
-        PreparedStatement st = conn.prepareStatement("SELECT eventKey, name FROM Events WHERE createdBy = ?");
-        st.setLong(1, userId);
-        
+        PreparedStatement st = conn.prepareStatement("SELECT eventKey, name, createdBy FROM Events WHERE createdBy = ?");
+
         ResultSet rs = st.executeQuery();
         
         while(rs.next()) {
-            Event event = new Event(rs.getLong("eventKey"), rs.getString("name"));
+            Event event = new Event(rs.getLong("eventKey"), 
+                    rs.getString("name"), 
+                    rs.getLong("createdBy"));
             userEvents.add(event);
         }
         
@@ -59,7 +77,7 @@ public class EventQuery extends DatabaseConnection {
         ArrayList<Event> userEvents = new ArrayList<Event>();
         
         PreparedStatement st = conn.prepareStatement(
-                "SELECT eventKey, name "
+                "SELECT eventKey, name, createdBy "
                 + "FROM Attendees "
                 + "INNER JOIN Events "
                 + "ON event = eventKey "
@@ -69,8 +87,9 @@ public class EventQuery extends DatabaseConnection {
         ResultSet rs = st.executeQuery();
         
         while(rs.next()) {
-            Event event = new Event(rs.getLong("eventKey"), rs.getString("name"));
-            userEvents.add(event);
+            userEvents.add(new Event(rs.getLong("eventKey"),
+                    rs.getString("name"),
+                    rs.getLong("createdBy")));
         }
         
         conn.close();

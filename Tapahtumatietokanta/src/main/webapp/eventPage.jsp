@@ -8,5 +8,7 @@
 <!DOCTYPE html>
 
 <%@include file="top.jspf" %>
-        <h1>Hello World!</h1>
+        <h1>${event.name}</h1><br>
+        ${event.information}<br>        
+        Attendees:<br>
 <%@include file="bottom.jspf" %>
