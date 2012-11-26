@@ -39,7 +39,7 @@ public class User {
         
         return (new EventQuery()).getEventsAttendedByUser(this.id);
     }
-
+    
     public static User loginUser(String name, String password) 
             throws ClassNotFoundException, SQLException {
         
