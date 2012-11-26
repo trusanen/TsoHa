@@ -16,7 +16,26 @@ public class UserQuery extends DatabaseConnection {
         super();
     }
     
-    public User getUser(String name, String password) throws SQLException {
+    public User getUser(String id) throws SQLException {
+        
+        PreparedStatement st = conn.prepareStatement("SELECT userKey, name FROM Users WHERE userKey = ?");
+        st.setString(1, id);
+        
+        ResultSet rs = st.executeQuery();
+        
+        if(rs.next()) {
+            User user = new User(rs.getInt(1), rs.getString(2));
+            rs.close();
+            return user;
+        }
+        else {
+            rs.close();
+            return null;
+        }
+        
+    }
+    
+    public User getUserByName(String name, String password) throws SQLException {
         
         PreparedStatement st = conn.prepareStatement("SELECT userKey, name FROM Users WHERE userName = ? AND password = ?");
         st.setString(1, name);

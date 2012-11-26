@@ -43,7 +43,7 @@ public class User {
     public static User loginUser(String name, String password) 
             throws ClassNotFoundException, SQLException {
         
-        return (new UserQuery()).getUser(name, password);
+        return (new UserQuery()).getUserByName(name, password);
     }
     
 }
