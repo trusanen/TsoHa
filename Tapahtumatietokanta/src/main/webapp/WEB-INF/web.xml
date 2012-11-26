@@ -8,17 +8,10 @@
         <servlet-name>UserPageServlet</servlet-name>
         <servlet-class>servlets.UserPageServlet</servlet-class>
     </servlet>
-<<<<<<< HEAD
     <servlet>
         <servlet-name>EventPageServlet</servlet-name>
         <servlet-class>servlets.EventPageServlet</servlet-class>
     </servlet>
-=======
-    <servlet-mapping>
-        <servlet-name>NewServlet</servlet-name>
-        <url-pattern>/NewServlet</url-pattern>
-    </servlet-mapping>
->>>>>>> Pieniä muutoksia kirjautumiseen
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -27,13 +20,10 @@
         <servlet-name>UserPageServlet</servlet-name>
         <url-pattern>/userPage</url-pattern>
     </servlet-mapping>
-<<<<<<< HEAD
     <servlet-mapping>
         <servlet-name>EventPageServlet</servlet-name>
         <url-pattern>/eventPage</url-pattern>
     </servlet-mapping>
-=======
->>>>>>> Pieniä muutoksia kirjautumiseen
     <session-config>
         <session-timeout>
             30

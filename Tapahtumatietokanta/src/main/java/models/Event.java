@@ -51,7 +51,5 @@ public class Event {
     public ArrayList<Comment> getComments() throws ClassNotFoundException, SQLException {
         
         return (new EventQuery()).getEventComments(id);
-        
     }
-    
 }
