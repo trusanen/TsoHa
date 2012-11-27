@@ -87,7 +87,7 @@ public class EventQuery extends DatabaseConnection {
                 + "FROM Comments "
                 + "INNER JOIN Users "
                 + "ON commentedBy = userKey "
-                + "WHERE eventKey = ? "
+                + "WHERE event = ? "
                 + "ORDER BY commentedDate desc");
         st.setInt(1, eventKey);
         
