@@ -58,7 +58,7 @@ public class EventListServlet extends MainServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
 }
