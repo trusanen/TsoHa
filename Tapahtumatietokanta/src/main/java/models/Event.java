@@ -3,6 +3,7 @@ package models;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import queries.EventQuery;
+import queries.UserQuery;
 
 /**
  *
@@ -30,6 +31,15 @@ public class Event {
         return name;
     }
     
+    public String getCreator() throws ClassNotFoundException, SQLException {
+        
+        UserQuery query = new UserQuery();
+        
+        User user = query.getUser(createdBy);
+        
+        return user.getName();
+    }
+    
     public String getInformation() throws ClassNotFoundException, SQLException {
         
         EventQuery query = new EventQuery();
@@ -40,8 +50,24 @@ public class Event {
         
     }
     
-    public ArrayList<User> getAttendees() {
-        return null;
+    public ArrayList<User> getAttendees() throws ClassNotFoundException, SQLException {
+        
+        EventQuery query = new EventQuery();
+        
+        ArrayList<User> attendees = query.getEventAttendees(id);
+        
+        return attendees;
+        
+    }
+    
+    public ArrayList<Comment> getComments() throws ClassNotFoundException, SQLException {
+        
+        EventQuery query = new EventQuery();
+        
+        ArrayList<Comment> comments = query.getEventComments(id);
+        
+        return comments;
+        
     }
     
 }

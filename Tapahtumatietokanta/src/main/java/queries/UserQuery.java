@@ -16,15 +16,15 @@ public class UserQuery extends DatabaseConnection {
         super();
     }
     
-    public User getUser(String id) throws SQLException {
+    public User getUser(long id) throws SQLException {
         
         PreparedStatement st = conn.prepareStatement("SELECT userKey, name FROM Users WHERE userKey = ?");
-        st.setString(1, id);
+        st.setLong(1, id);
         
         ResultSet rs = st.executeQuery();
         
         if(rs.next()) {
-            User user = new User(rs.getInt(1), rs.getString(2));
+            User user = new User(rs.getLong("userKey"), rs.getString("name"));
             rs.close();
             return user;
         }
