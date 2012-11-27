@@ -25,7 +25,6 @@ public class EventPageServlet extends MainServlet {
             throws ServletException, IOException {
         
         if(confirmLogin(request, response)) {
-
             int eventKey = Integer.parseInt(request.getParameter("event"));
             
             try {

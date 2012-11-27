@@ -39,13 +39,11 @@ public class Event {
     public String getInformation() throws ClassNotFoundException, SQLException {
         
         return (new EventQuery()).getEventInformation(id);
-        
     }
     
     public ArrayList<User> getAttendees() throws ClassNotFoundException, SQLException {
         
         return (new EventQuery()).getEventAttendees(id);
-        
     }
     
     public ArrayList<Comment> getComments() throws ClassNotFoundException, SQLException {
