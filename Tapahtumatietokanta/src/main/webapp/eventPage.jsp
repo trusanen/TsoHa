@@ -10,8 +10,7 @@
 <%@include file="top.jspf" %>
         <h1>${event.name}</h1>
         Event created by ${event.creator}<br>
-        Event information:<br>
-        ${event.information}<br>
+        <br><br>${event.information}<br><br>
         Attendees:<br>
         <c:choose>
             <c:when test="${empty event.attendees}">
