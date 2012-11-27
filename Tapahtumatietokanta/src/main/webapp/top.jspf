@@ -12,5 +12,11 @@
                 <td>
                     <a href="events">Selaa tapahtumia</a>
                 </td>
+                <td>
+                    <a href="userPage">Omat sivut</a>
+                </td>
+                <td>
+                    <a href="logout">Kirjaudu ulos</a>
+                </td>
             </tr>
         </table>
