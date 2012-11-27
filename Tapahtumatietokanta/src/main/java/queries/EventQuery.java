@@ -79,6 +79,31 @@ public class EventQuery extends DatabaseConnection {
         return comments;
     }
     
+    public ArrayList<Comment> getEventComments(int eventKey) throws SQLException {
+        
+        ArrayList<Comment> comments = new ArrayList<Comment>();
+        
+        PreparedStatement st = conn.prepareStatement("SELECT commentKey, commentedDate, name, text "
+                + "FROM Comments "
+                + "INNER JOIN Users "
+                + "ON commentedBy = userKey "
+                + "WHERE eventKey = ? "
+                + "ORDER BY commentedDate desc");
+        st.setInt(1, eventKey);
+        
+        ResultSet rs = st.executeQuery();
+        
+        while(rs.next()) {
+            
+            Comment comment = new Comment(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getString(4));
+            comments.add(comment);
+        }
+        
+        rs.close();
+        
+        return comments;
+    }
+    
     public ArrayList<User> getEventAttendees(long eventKey) throws SQLException {
         
         ArrayList<User> eventAttendees = new ArrayList<User>();
