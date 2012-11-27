@@ -1,8 +1,10 @@
 package queries;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import models.DatabaseConnection;
 import models.User;
 
@@ -51,4 +53,16 @@ public class UserQuery extends DatabaseConnection {
         conn.close();
         return user;
     }    
+    
+    public void attendEvent(long userKey, long eventKey) throws SQLException {
+        
+        PreparedStatement st = conn.prepareStatement("INSERT INTO Attendees VALUES (?, ?, NOW())");
+        st.setLong(1, userKey);
+        st.setLong(2, eventKey);
+        
+        st.execute();
+        
+        conn.close();
+    }
+    
 }

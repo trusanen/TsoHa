@@ -5,16 +5,21 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.User;
 
 /**
  *
  * @author trusanen
  */
-public class LogoutServlet extends MainServlet {
+public class AttendEventServlet extends MainServlet {
 
     /**
      * Processes requests for both HTTP
@@ -30,10 +35,27 @@ public class LogoutServlet extends MainServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        HttpSession session = request.getSession(true);
-        session.removeAttribute("user");
-        response.sendRedirect("loginpage.jsp");
-        
+        if(confirmLogin(request, response)) {
+            
+            // TÄHÄN VIELÄ TARKISTUS, ETTÄ EI OLE JO ILMOITTAUTUNUT!
+            
+            int eventKey = Integer.parseInt(request.getParameter("event"));
+            
+            HttpSession session = request.getSession(true);
+            User user = (User)session.getAttribute("user");
+            
+            try {
+                user.attendEvent(eventKey);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AttendEventServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(AttendEventServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher("eventPage?event=" + eventKey);
+            dispatcher.forward(request, response);
+            
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
