@@ -17,10 +17,10 @@ public class EventQuery extends DatabaseConnection {
         super();
     }
     
-    public Event getEvent(String key) throws SQLException {
+    public Event getEvent(int key) throws SQLException {
         
         PreparedStatement st = conn.prepareStatement("SELECT eventKey, name, createdBy FROM Events WHERE eventKey = ?");
-        st.setString(1, key);
+        st.setInt(1, key);
         
         ResultSet rs = st.executeQuery();
         Event event = null;

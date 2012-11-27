@@ -54,7 +54,7 @@ public class EventPageServlet extends MainServlet {
         
         if(confirmLogin(request, response)) {
             
-            String eventKey = request.getParameter("event");
+            int eventKey = Integer.parseInt(request.getParameter("event"));
             
             try {
                 EventQuery query = new EventQuery();
@@ -68,7 +68,6 @@ public class EventPageServlet extends MainServlet {
             
             RequestDispatcher dispatcher = request.getRequestDispatcher("eventPage.jsp");
             dispatcher.forward(request, response);
-            
         }
     }
 
