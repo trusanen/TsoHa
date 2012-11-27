@@ -15,7 +15,7 @@ public class UserQuery extends DatabaseConnection {
     public UserQuery() throws ClassNotFoundException, SQLException {
         super();
     }
-
+    
     public User getUser(long id) throws SQLException {
         
         PreparedStatement st = conn.prepareStatement("SELECT userKey, name FROM Users WHERE userKey = ?");
