@@ -35,6 +35,27 @@ public class EventQuery extends DatabaseConnection {
         return event;
     }
     
+    public ArrayList<Event> getEvents() throws SQLException {
+        
+        ArrayList<Event> events = new ArrayList<Event>();
+        
+        PreparedStatement st = conn.prepareStatement("SELECT eventKey, name, createdBy "
+                + "FROM Events");
+        
+        ResultSet rs = st.executeQuery();
+        
+        while(rs.next()) {
+            
+            Event event = new Event(rs.getLong("eventKey"), rs.getString("name"), rs.getLong("createdBy"));
+            events.add(event);
+        }
+        
+        conn.close();
+        
+        return events;
+        
+    }
+    
     public String getEventInformation(long key) throws SQLException {
         
         PreparedStatement st = conn.prepareStatement("SELECT information FROM Events WHERE eventKey = ?");
