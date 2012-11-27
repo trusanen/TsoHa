@@ -151,5 +151,4 @@ public class EventQuery extends DatabaseConnection {
         return userEvents;
         
     }
-    
 }
