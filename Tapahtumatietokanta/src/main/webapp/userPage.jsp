@@ -18,7 +18,7 @@
             <c:otherwise>
                 <ul>
                     <c:forEach var="event" items="${user.createdEvents}">
-                        <li>${event.name}</li>
+                        <li><a href="eventPage?event=${event.id}">${event.name}</a></li>
                     </c:forEach>
                 </ul><br>
             </c:otherwise>
@@ -33,7 +33,7 @@
             <c:otherwise>
                 <ul>
                     <c:forEach var="event" items="${user.attendedEvents}">
-                        <li>${event.name}</li>
+                        <li><a href="eventPage?event=${event.id}">${event.name}</a></li>
                     </c:forEach>
                 </ul>
             </c:otherwise>

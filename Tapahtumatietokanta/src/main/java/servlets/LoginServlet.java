@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         HttpSession session = request.getSession(true);
         
         String username = request.getParameter("un");
@@ -54,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 
                 if(newUser != null) {
                     session.setAttribute("user", newUser);
-                    response.sendRedirect("userPage.jsp");
+                    response.sendRedirect("userPage");
                 }
                 else {
                     request.setAttribute("errormsg", "Kirjautuminen epäonnistui.");
