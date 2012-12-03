@@ -22,5 +22,4 @@ public class DatabaseConnection {
 
             conn = DriverManager.getConnection("jdbc:postgresql://localhost/trusanen", "trusanen", "newPass");
     }
-    
 }

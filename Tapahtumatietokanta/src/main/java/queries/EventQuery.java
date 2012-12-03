@@ -19,10 +19,10 @@ public class EventQuery extends DatabaseConnection {
         super();
     }
     
-    public Event getEvent(int eventKey) throws SQLException {
+    public Event getEvent(long eventKey) throws SQLException {
         
         PreparedStatement st = conn.prepareStatement("SELECT eventKey, name, createdBy FROM Events WHERE eventKey = ?");
-        st.setInt(1, eventKey);
+        st.setLong(1, eventKey);
         
         ResultSet rs = st.executeQuery();
         Event event = null;
@@ -35,24 +35,43 @@ public class EventQuery extends DatabaseConnection {
         return event;
     }
     
+    public ArrayList<Event> getEvents() throws SQLException {
+        
+        ArrayList<Event> events = new ArrayList<Event>();
+        
+        PreparedStatement st = conn.prepareStatement("SELECT eventKey, name, createdBy "
+                + "FROM Events");
+        
+        ResultSet rs = st.executeQuery();
+        
+        while(rs.next()) {
+            
+            Event event = new Event(rs.getLong("eventKey"), rs.getString("name"), rs.getLong("createdBy"));
+            events.add(event);
+        }
+        
+        conn.close();
+        
+        return events;
+        
+    }
+    
     public String getEventInformation(long key) throws SQLException {
         
         PreparedStatement st = conn.prepareStatement("SELECT information FROM Events WHERE eventKey = ?");
         st.setLong(1, key);
         
         ResultSet rs = st.executeQuery();
+        String info = "";
         
         if(rs.next()) {
-            String info = rs.getString(1);
-            rs.close();
-            return info;
+            info = rs.getString("information");
         }
-        else {
-            rs.close();
-            return "";
-        }
+        
+        conn.close();
+        
+        return info;
     }
-    
 
     public ArrayList<Comment> getEventComments(long eventKey) throws SQLException {
         
@@ -68,8 +87,7 @@ public class EventQuery extends DatabaseConnection {
         
         ResultSet rs = st.executeQuery();
         
-        while(rs.next()) {
-            
+        while(rs.next()) {            
             Comment comment = new Comment(rs.getLong("commentKey"),
                     rs.getDate("commentedDate"),
                     rs.getString("name"),
@@ -77,7 +95,7 @@ public class EventQuery extends DatabaseConnection {
             comments.add(comment);
         }
         
-        rs.close();
+        conn.close();
         
         return comments;
     }
@@ -96,20 +114,21 @@ public class EventQuery extends DatabaseConnection {
         ResultSet rs = st.executeQuery();
         
         while(rs.next()) {
-            User user = new User(rs.getInt("attends"), rs.getString("name"));
+            User user = new User(rs.getLong("attends"), rs.getString("name"));
             eventAttendees.add(user);
         }
         
-        rs.close();
+        conn.close();
         
         return eventAttendees;
     }
-
+    
     public ArrayList<Event> getEventsCreatedByUser(long userId) throws SQLException {
         
         ArrayList<Event> userEvents = new ArrayList<Event>();
         
         PreparedStatement st = conn.prepareStatement("SELECT eventKey, name, createdBy FROM Events WHERE createdBy = ?");
+        st.setLong(1, userId);
 
         ResultSet rs = st.executeQuery();
         

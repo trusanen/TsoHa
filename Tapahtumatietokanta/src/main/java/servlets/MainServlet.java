@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import models.User;
 
 /**
@@ -40,7 +33,8 @@ public class MainServlet extends HttpServlet {
             request.setAttribute("user", user);
             return true;
         }
-        response.sendRedirect("loginpage.jsp");
+        
+        response.sendRedirect("login");
         return false;
     }
     

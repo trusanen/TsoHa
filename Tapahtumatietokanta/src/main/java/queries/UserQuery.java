@@ -15,7 +15,7 @@ public class UserQuery extends DatabaseConnection {
     public UserQuery() throws ClassNotFoundException, SQLException {
         super();
     }
-    
+
     public User getUser(long id) throws SQLException {
         
         PreparedStatement st = conn.prepareStatement("SELECT userKey, name FROM Users WHERE userKey = ?");
@@ -23,15 +23,15 @@ public class UserQuery extends DatabaseConnection {
         
         ResultSet rs = st.executeQuery();
         
+        User user = null;
+        
         if(rs.next()) {
-            User user = new User(rs.getLong("userKey"), rs.getString("name"));
-            rs.close();
-            return user;
+            user = new User(rs.getLong("userKey"), rs.getString("name"));
         }
-        else {
-            rs.close();
-            return null;
-        }
+        
+        conn.close();
+        
+        return user;
         
     }
     
