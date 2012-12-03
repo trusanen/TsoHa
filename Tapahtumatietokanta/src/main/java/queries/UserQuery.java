@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package queries;
 
 import java.sql.PreparedStatement;
@@ -27,16 +23,13 @@ public class UserQuery extends DatabaseConnection {
         st.setString(2, password);
         
         ResultSet rs = st.executeQuery();
+        User user = null;
         
         if(rs.next()) {
-            User user = new User(rs.getInt(1), rs.getString(2));
-            rs.close();
-            return user;
+            user = new User(rs.getLong("userKey"), rs.getString("name"));
         }
-        else {
-            rs.close();
-            return null;
-        }
-    }
-    
+        
+        conn.close();
+        return user;
+    }    
 }

@@ -9,9 +9,6 @@
     </head>
     <body>
         <h1>Hello World!</h1><br>
-        <a href="loginpage.jsp">Tässä linkki!</a><br>
-        <form id="testi" action="NewServlet" method="POST">
-            <input type="submit" value="Testaa servlettiä">
-        </form>
+        <a href="login">Tässä linkki tapahtumatietokantaan!</a><br>
     </body>
 </html>

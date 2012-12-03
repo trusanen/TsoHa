@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 /**
@@ -10,10 +6,10 @@ package models;
  */
 public class Event {
     
-    private int id;
+    private long id;
     private String name;
     
-    public Event(int id, String name) {
+    public Event(long id, String name) {
         
         this.id = id;
         this.name = name;

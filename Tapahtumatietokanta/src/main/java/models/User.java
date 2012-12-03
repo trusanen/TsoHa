@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import java.sql.SQLException;
@@ -15,15 +11,15 @@ import queries.UserQuery;
  */
 public class User {
     
-    private int id;
+    private long id;
     private String name;
     
-    public User(int id, String name) {
+    public User(long id, String name) {
         this.id = id;
         this.name = name;
     }
     
-    public int getId() {
+    public long getId() {
         return id;
     }
     
@@ -34,31 +30,20 @@ public class User {
     public ArrayList<Event> getCreatedEvents() 
             throws ClassNotFoundException, SQLException {
         
-        EventQuery eventQuery = new EventQuery();
-        
-        ArrayList<Event> userEvents = eventQuery.getEventsCreatedByUser(this.id);
-        
-        return userEvents;
+        return (new EventQuery()).getEventsCreatedByUser(this.id);
         
     }
     
     public ArrayList<Event> getAttendedEvents() 
             throws ClassNotFoundException, SQLException {
-
-        EventQuery eventQuery = new EventQuery();
         
-        ArrayList<Event> userEvents = eventQuery.getEventsAttendedByUser(this.id);
-        
-        return userEvents;
+        return (new EventQuery()).getEventsAttendedByUser(this.id);
     }
     
-    public static User loginUser(String name, String password) throws ClassNotFoundException, SQLException {
+    public static User loginUser(String name, String password) 
+            throws ClassNotFoundException, SQLException {
         
-        UserQuery q = new UserQuery();
-        
-        User newUser = q.getUser(name, password);
-        
-        return newUser;
+        return (new UserQuery()).getUser(name, password);
     }
     
 }

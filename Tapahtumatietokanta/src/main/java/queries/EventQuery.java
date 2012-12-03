@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package queries;
 
 import java.sql.PreparedStatement;
@@ -28,39 +24,37 @@ public class EventQuery extends DatabaseConnection {
         st.setString(2, password);
         
         ResultSet rs = st.executeQuery();
+        Event event = null;
         
         if(rs.next()) {
-            Event event = new Event(rs.getInt(1), rs.getString(2));
-            rs.close();
-            return event;
+            event = new Event(rs.getLong("eventKey"), rs.getString("name"));
         }
-        else {
-            rs.close();
-            return null;
-        }
+        
+        conn.close();
+        return event;
     }
     
-    public ArrayList<Event> getEventsCreatedByUser(int userId) throws SQLException {
+    public ArrayList<Event> getEventsCreatedByUser(long userId) throws SQLException {
         
         ArrayList<Event> userEvents = new ArrayList<Event>();
         
         PreparedStatement st = conn.prepareStatement("SELECT eventKey, name FROM Events WHERE createdBy = ?");
-        st.setInt(1, userId);
+        st.setLong(1, userId);
         
         ResultSet rs = st.executeQuery();
         
         while(rs.next()) {
-            Event event = new Event(rs.getInt(1), rs.getString(2));
+            Event event = new Event(rs.getLong("eventKey"), rs.getString("name"));
             userEvents.add(event);
         }
         
-        rs.close();
+        conn.close();
         
         return userEvents;
         
     }
     
-    public ArrayList<Event> getEventsAttendedByUser(int userId) throws SQLException {
+    public ArrayList<Event> getEventsAttendedByUser(long userId) throws SQLException {
         
         ArrayList<Event> userEvents = new ArrayList<Event>();
         
@@ -70,16 +64,16 @@ public class EventQuery extends DatabaseConnection {
                 + "INNER JOIN Events "
                 + "ON event = eventKey "
                 + "WHERE attends = ?");
-        st.setInt(1, userId);
+        st.setLong(1, userId);
         
         ResultSet rs = st.executeQuery();
         
         while(rs.next()) {
-            Event event = new Event(rs.getInt(1), rs.getString(2));
+            Event event = new Event(rs.getLong("eventKey"), rs.getString("name"));
             userEvents.add(event);
         }
         
-        rs.close();
+        conn.close();
         
         return userEvents;
         
