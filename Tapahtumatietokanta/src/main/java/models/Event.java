@@ -33,40 +33,24 @@ public class Event {
     
     public String getCreator() throws ClassNotFoundException, SQLException {
         
-        UserQuery query = new UserQuery();
-        
-        User user = query.getUser(createdBy);
-        
-        return user.getName();
+        return (new UserQuery()).getUser(createdBy).getName();
     }
     
     public String getInformation() throws ClassNotFoundException, SQLException {
         
-        EventQuery query = new EventQuery();
-        
-        String info = query.getEventInformation(id);
-        
-        return info;
+        return (new EventQuery()).getEventInformation(id);
         
     }
     
     public ArrayList<User> getAttendees() throws ClassNotFoundException, SQLException {
         
-        EventQuery query = new EventQuery();
-        
-        ArrayList<User> attendees = query.getEventAttendees(id);
-        
-        return attendees;
+        return (new EventQuery()).getEventAttendees(id);
         
     }
     
     public ArrayList<Comment> getComments() throws ClassNotFoundException, SQLException {
         
-        EventQuery query = new EventQuery();
-        
-        ArrayList<Comment> comments = query.getEventComments(id);
-        
-        return comments;
+        return (new EventQuery()).getEventComments(id);
         
     }
     
