@@ -6,6 +6,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Event;
 import models.User;
 
 /**
@@ -36,16 +38,27 @@ public class AttendEventServlet extends MainServlet {
             throws ServletException, IOException {
         
         if(confirmLogin(request, response)) {
-            
-            // TÄHÄN VIELÄ TARKISTUS, ETTÄ EI OLE JO ILMOITTAUTUNUT!
-            
+            // TÄHÄN TARKISTUS, ETTÄ EI OLE JO ILMOITTAUTUNUT?
             int eventKey = Integer.parseInt(request.getParameter("event"));
             
             HttpSession session = request.getSession(true);
             User user = (User)session.getAttribute("user");
             
             try {
+                // Check, if user is attending event
+                ArrayList<Event> attendedEvents = user.getAttendedEvents();
+
+                for(Event e : attendedEvents) {
+                    
+                    if(eventKey == e.getId()) {
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("eventPage?event=" + eventKey);
+                        dispatcher.forward(request, response);
+                        return;
+                    }
+                }
+            
                 user.attendEvent(eventKey);
+                
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(AttendEventServlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {

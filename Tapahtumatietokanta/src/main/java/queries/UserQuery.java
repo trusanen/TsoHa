@@ -52,7 +52,7 @@ public class UserQuery extends DatabaseConnection {
         
         conn.close();
         return user;
-    }    
+    } 
     
     public void attendEvent(long userKey, long eventKey) throws SQLException {
         
