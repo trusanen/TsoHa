@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package queries;
 
 import java.sql.PreparedStatement;
@@ -18,23 +14,22 @@ public class UserQuery extends DatabaseConnection {
     
     public UserQuery() throws ClassNotFoundException, SQLException {
         super();
-        
     }
     
-    public User getUser(String name) throws SQLException {
+    public User getUser(String name, String password) throws SQLException {
         
-        PreparedStatement st = conn.prepareStatement("SELECT password FROM Kayttaja WHERE name = ?");
+        PreparedStatement st = conn.prepareStatement("SELECT userKey, name FROM Users WHERE userName = ? AND password = ?");
         st.setString(1, name);
+        st.setString(2, password);
         
         ResultSet rs = st.executeQuery();
+        User user = null;
         
         if(rs.next()) {
-            User user = new User(rs.getInt(1));
-            return user;
+            user = new User(rs.getLong("userKey"), rs.getString("name"));
         }
-        else {
-            return null;
-        }
-    }
-    
+        
+        conn.close();
+        return user;
+    }    
 }

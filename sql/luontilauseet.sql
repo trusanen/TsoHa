@@ -1,34 +1,34 @@
-CREATE TABLE Kayttaja
+CREATE TABLE Users
 (
-kayttajaKey serial NOT NULL PRIMARY KEY,
-kayttajaNimi varchar NOT NULL UNIQUE,
-salasana varchar NOT NULL,
-nimi varchar NOT NULL,
-liittynytPVM date NOT NULL
+userKey serial NOT NULL PRIMARY KEY,
+userName varchar NOT NULL UNIQUE,
+password varchar NOT NULL,
+name varchar NOT NULL,
+joinDate date NOT NULL
 );
 
-CREATE TABLE Tapahtuma
+CREATE TABLE Events
 (
-tapahtumaKey serial NOT NULL PRIMARY KEY,
-luonut int references Kayttaja(kayttajaKey),
-luotuPVM date NOT NULL,
-nimi varchar NOT NULL,
-tiedot text
+eventKey serial NOT NULL PRIMARY KEY,
+createdBy int references Users(userKey),
+createdDate date NOT NULL,
+name varchar NOT NULL,
+information text
 );
 
-CREATE TABLE Ilmoittautumiset
+CREATE TABLE Attendees
 (
-ilmoittautunut int references Kayttaja(kayttajaKey),
-tapahtuma int references Tapahtuma(tapahtumaKey),
-ilmoittautumisPVM date
+attends int references Users(userKey),
+event int references Events(eventKey),
+joinDate date
 );
 
-CREATE TABLE Kommentti
+CREATE TABLE Comments
 (
-kommenttiKey serial NOT NULL,
-kommentoija int references Kayttaja(kayttajaKey),
-tapahtuma int references Tapahtuma(tapahtumaKey),
-kommenttiPVM date,
-teksti varchar NOT NULL
+commentKey serial NOT NULL,
+commentedBy int references Users(userKey),
+event int references Events(eventKey),
+commentedDate date,
+text varchar NOT NULL
 );
 
