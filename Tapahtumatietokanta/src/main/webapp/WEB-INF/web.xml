@@ -27,6 +27,13 @@
     <servlet>
         <servlet-name>UnattendEventServlet</servlet-name>
         <servlet-class>servlets.UnattendEventServlet</servlet-class>
+    <servlet>
+        <servlet-name>CreateEventServlet</servlet-name>
+        <servlet-class>servlets.CreateEventServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteEventServlet</servlet-name>
+        <servlet-class>servlets.DeleteEventServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -55,6 +62,13 @@
     <servlet-mapping>
         <servlet-name>UnattendEventServlet</servlet-name>
         <url-pattern>/unattend</url-pattern>
+    </servlet-mapping>
+        <servlet-name>CreateEventServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteEventServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
