@@ -52,7 +52,7 @@ public class CreateEventServlet extends MainServlet {
             String name = request.getParameter("name");
             String information = request.getParameter("information");
             
-            if(name != null && information != null) {
+            if(!name.equals("") && !information.equals("")) {
             
                 try {
 
@@ -61,14 +61,12 @@ public class CreateEventServlet extends MainServlet {
 
                     (new EventQuery()).createEvent(userId, name, information);
                     
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("userPage.jsp");
-                    dispatcher.forward(request, response);
-
                 } catch (Exception ex) {
                     Logger.getLogger(CreateEventServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
+            
+            response.sendRedirect("userPage");
         }
     }
 

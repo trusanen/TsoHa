@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import queries.EventQuery;
@@ -33,12 +32,11 @@ public class DeleteEventServlet extends MainServlet {
                 long eventKey = Integer.parseInt(request.getParameter("event"));
 
                 (new EventQuery()).deleteEvent(eventKey);
+                
+                response.sendRedirect("userPage");
             } catch (Exception ex) {
                 Logger.getLogger(DeleteEventServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            RequestDispatcher dispatcher = request.getRequestDispatcher("userPage");
-            dispatcher.forward(request, response);
         }
     }
 
