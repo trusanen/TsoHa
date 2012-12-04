@@ -10,6 +10,9 @@
 <%@include file="top.jspf" %>
         <h1>${event.name}</h1>
         Event created by ${event.creator}<br>
+        <c:if test="${event.creator == user.name}">
+            <a href="delete?event=${event.id}">Cancel this event</a>
+        </c:if>
         <br><br>${event.information}<br><br>
         <a href="attend?event=${event.id}">Sign up for this event</a><br>
         Attendees:<br>

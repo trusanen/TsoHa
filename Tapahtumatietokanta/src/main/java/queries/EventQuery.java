@@ -184,4 +184,40 @@ public class EventQuery extends DatabaseConnection {
         conn.close();
         
     }
+    
+    public void deleteEvent(long eventKey) throws SQLException, ClassNotFoundException {
+        
+        (new EventQuery()).deleteAttendeesOfEvent(eventKey);
+        (new EventQuery()).deleteCommentsOfEvent(eventKey);
+        
+        PreparedStatement st = conn.prepareStatement("DELETE FROM Events WHERE eventKey = ?");
+        st.setLong(1, eventKey);
+        
+        st.execute();
+        
+        conn.close();
+        
+    }
+    
+    public void deleteAttendeesOfEvent(long eventKey) throws SQLException {
+        
+        PreparedStatement st = conn.prepareStatement("DELETE FROM Attendees WHERE event = ?");
+        st.setLong(1, eventKey);
+        
+        st.execute();
+        
+        conn.close();
+        
+    }
+    
+    public void deleteCommentsOfEvent(long eventKey) throws SQLException {
+        
+        PreparedStatement st = conn.prepareStatement("DELETE FROM Comments WHERE event = ?");
+        st.setLong(1, eventKey);
+        
+        st.execute();
+        
+        conn.close();
+        
+    }
 }
