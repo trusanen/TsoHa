@@ -11,6 +11,7 @@
         <h1>${event.name}</h1>
         Event created by ${event.creator}<br>
         <br><br>${event.information}<br><br>
+        <a href="attend?event=${event.id}">Sign up for this event</a><br>
         Attendees:<br>
         <c:choose>
             <c:when test="${empty event.attendees}">

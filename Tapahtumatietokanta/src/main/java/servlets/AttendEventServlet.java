@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,14 +9,15 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.Event;
-import queries.EventQuery;
+import models.User;
 
 /**
  *
  * @author trusanen
  */
-public class EventListServlet extends MainServlet {
+public class AttendEventServlet extends MainServlet {
 
     /**
      * Handles the HTTP
@@ -31,17 +33,32 @@ public class EventListServlet extends MainServlet {
             throws ServletException, IOException {
         
         if(confirmLogin(request, response)) {
+            // TÄHÄN TARKISTUS, ETTÄ EI OLE JO ILMOITTAUTUNUT?
+            int eventKey = Integer.parseInt(request.getParameter("event"));
+            
+            HttpSession session = request.getSession(true);
+            User user = (User)session.getAttribute("user");
             
             try {
-                ArrayList<Event> events = (new EventQuery()).getEvents();
-                
-                request.setAttribute("events", events);
+                // Check, if user is attending event
+                ArrayList<Event> attendedEvents = user.getAttendedEvents();
+
+                for(Event e : attendedEvents) {
+                    
+                    if(eventKey == e.getId()) {
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("eventPage?event=" + eventKey);
+                        dispatcher.forward(request, response);
+                        return;
+                    }
+                }
+            
+                user.attendEvent(eventKey);
                 
             } catch (Exception ex) {
-                Logger.getLogger(EventListServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AttendEventServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            RequestDispatcher dispatcher = request.getRequestDispatcher("events.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("eventPage?event=" + eventKey);
             dispatcher.forward(request, response);
         }
     }
@@ -58,7 +75,6 @@ public class EventListServlet extends MainServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
     }
-
 }

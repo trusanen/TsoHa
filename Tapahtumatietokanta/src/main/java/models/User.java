@@ -39,7 +39,12 @@ public class User {
         
         return (new EventQuery()).getEventsAttendedByUser(this.id);
     }
+    
+    public void attendEvent(long eventKey) throws ClassNotFoundException, SQLException {
 
+        (new UserQuery()).attendEvent(id, eventKey);
+    }
+    
     public static User loginUser(String name, String password) 
             throws ClassNotFoundException, SQLException {
         

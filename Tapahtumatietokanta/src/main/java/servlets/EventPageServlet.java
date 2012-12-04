@@ -23,6 +23,8 @@ public class EventPageServlet extends MainServlet {
         if(confirmLogin(request, response)) {
             int eventKey = Integer.parseInt(request.getParameter("event"));
             
+            // TÄNNE TARKISTUS, ONKO KÄYTTÄJÄ JO ILMOITTAUTUNUT TAPAHTUMAAN!
+            
             try {
                 EventQuery query = new EventQuery();
                 Event event = query.getEvent(eventKey);
@@ -51,4 +53,5 @@ public class EventPageServlet extends MainServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
+
 }
