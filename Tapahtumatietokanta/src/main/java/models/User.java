@@ -40,7 +40,7 @@ public class User {
         return (new EventQuery()).getEventsAttendedByUser(this.id);
     }
     
-    public void attendEvent(int eventKey) throws ClassNotFoundException, SQLException {
+    public void attendEvent(long eventKey) throws ClassNotFoundException, SQLException {
 
         (new UserQuery()).attendEvent(id, eventKey);
     }

@@ -54,9 +54,7 @@ public class AttendEventServlet extends MainServlet {
             
                 user.attendEvent(eventKey);
                 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AttendEventServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(AttendEventServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             

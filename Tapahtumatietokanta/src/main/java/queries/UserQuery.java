@@ -56,7 +56,7 @@ public class UserQuery extends DatabaseConnection {
     
     public void attendEvent(long userKey, long eventKey) throws SQLException {
         
-        PreparedStatement st = conn.prepareStatement("INSERT INTO Attendees VALUES (?, ?, NOW())");
+        PreparedStatement st = conn.prepareStatement("INSERT INTO Attendees VALUES (?, ?)");
         st.setLong(1, userKey);
         st.setLong(2, eventKey);
         
