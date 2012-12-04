@@ -170,4 +170,18 @@ public class EventQuery extends DatabaseConnection {
         return userEvents;
         
     }
+    
+    public void createEvent(long createdBy, String name, String information) throws SQLException {
+        
+        PreparedStatement st = conn.prepareStatement("INSERT INTO Events (createdBy, name, information) "
+                + "VALUES (?, ?, ?)");
+        st.setLong(1, createdBy);
+        st.setString(2, name);
+        st.setString(3, information);
+        
+        st.execute();
+        
+        conn.close();
+        
+    }
 }

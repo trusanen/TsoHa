@@ -10,6 +10,7 @@
 <%@include file="top.jspf" %>
         <h1>Hello ${user.name}!</h1>
         Your user id is ${user.id}!<br>
+        <a href="create">Create a new event</a><br>
         Events created by you:<br>
         <c:choose>
             <c:when test="${empty user.createdEvents}">
