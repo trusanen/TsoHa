@@ -4,7 +4,7 @@
  */
 package models;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -13,14 +13,14 @@ import java.sql.Date;
 public class Comment {
     
     private long id;
-    private Date date;
+    private Timestamp timePosted;
     private String commentedBy;
     private String text;
     
-    public Comment(long id, Date date, String commentedBy, String text) {
+    public Comment(long id, Timestamp timePosted, String commentedBy, String text) {
         
         this.id = id;
-        this.date = date;
+        this.timePosted = timePosted;
         this.commentedBy = commentedBy;
         this.text = text;
         
@@ -30,8 +30,11 @@ public class Comment {
         return id;
     }
     
-    public String getDate() {
-        return date.toString();
+    public String getTimePosted() {
+        
+        String time = timePosted.toString();
+        
+        return time.substring(0, time.length() - 7);
     }
     
     public String getCommentator() {

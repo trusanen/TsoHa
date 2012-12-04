@@ -89,7 +89,7 @@ public class EventQuery extends DatabaseConnection {
         
         while(rs.next()) {            
             Comment comment = new Comment(rs.getLong("commentKey"),
-                    rs.getDate("commentedDate"),
+                    rs.getTimestamp("commentedDate"),
                     rs.getString("name"),
                     rs.getString("text"));
             comments.add(comment);

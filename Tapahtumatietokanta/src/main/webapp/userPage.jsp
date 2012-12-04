@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="top.jspf" %>
         <h1>Hello ${user.name}!</h1>
-        Your user id is ${user.id}!<br>
+        Your user id is ${user.id}!<br><br>
         <a href="create">Create a new event</a><br>
         Events created by you:<br>
         <c:choose>

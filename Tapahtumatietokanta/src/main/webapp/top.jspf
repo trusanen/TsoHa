@@ -10,13 +10,13 @@
         <table>
             <tr>
                 <td>
-                    <a href="events">Selaa tapahtumia</a>
+                    <a href="events">Browse events</a>
                 </td>
                 <td>
-                    <a href="userPage">Omat sivut</a>
+                    <a href="userPage">${user.name}</a>
                 </td>
                 <td>
-                    <a href="logout">Kirjaudu ulos</a>
+                    <a href="logout">Logout</a>
                 </td>
             </tr>
         </table>

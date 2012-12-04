@@ -7,6 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import models.Event;
+import models.User;
 import queries.EventQuery;
 
 /**
@@ -46,6 +47,26 @@ public class EventPageServlet extends MainServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        if(confirmLogin(request, response)) {
+            
+            long eventKey = Integer.parseInt(request.getParameter("event"));
+            String comment = request.getParameter("comment");
+            
+            if(!comment.equals("")) {
+            
+                try {
+
+                    HttpSession session = request.getSession(true);
+                    ((User)session.getAttribute("user")).commentEvent(eventKey, comment);
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(CreateEventServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            response.sendRedirect("eventPage?event=" + eventKey);
+        }
     }
 
 }
