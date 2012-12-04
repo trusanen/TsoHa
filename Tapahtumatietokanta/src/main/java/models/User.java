@@ -2,6 +2,7 @@ package models;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import queries.EventQuery;
 import queries.UserQuery;
 
@@ -48,6 +49,20 @@ public class User {
     public void unattendEvent(long eventKey) throws ClassNotFoundException, SQLException {
 
         (new UserQuery()).unattendEvent(id, eventKey);
+    }
+    
+    public boolean isAttendingEvent(long eventKey) throws ClassNotFoundException, SQLException {
+        
+        ArrayList<Event> attendedEvents = getAttendedEvents();
+
+        for(Event e : attendedEvents) {
+
+            if(eventKey == e.getId()) {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     public static User loginUser(String name, String password) 

@@ -1,13 +1,11 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import models.Event;
 import models.User;
 
 /**
@@ -37,17 +35,8 @@ public class UnattendEventServlet extends MainServlet {
             User user = (User)session.getAttribute("user");
             
             try {
-                // Check, if user is attending event
-                ArrayList<Event> attendedEvents = user.getAttendedEvents();
-
-                for(Event e : attendedEvents) {
-                    
-                    if(eventKey == e.getId()) {
-                        user.unattendEvent(eventKey);
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("eventPage?event=" + eventKey);
-                        dispatcher.forward(request, response);
-                        return;
-                    }
+                if(user.isAttendingEvent(eventKey)) {
+                    user.unattendEvent(eventKey);
                 }
                 
             } catch (Exception ex) {
