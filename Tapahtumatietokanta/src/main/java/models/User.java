@@ -45,6 +45,11 @@ public class User {
         (new UserQuery()).attendEvent(id, eventKey);
     }
     
+    public void unattendEvent(long eventKey) throws ClassNotFoundException, SQLException {
+
+        (new UserQuery()).unattendEvent(id, eventKey);
+    }
+    
     public static User loginUser(String name, String password) 
             throws ClassNotFoundException, SQLException {
         

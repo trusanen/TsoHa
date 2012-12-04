@@ -14,7 +14,7 @@ import models.User;
  *
  * @author trusanen
  */
-public class AttendEventServlet extends MainServlet {
+public class UnattendEventServlet extends MainServlet {
 
     /**
      * Handles the HTTP
@@ -43,13 +43,12 @@ public class AttendEventServlet extends MainServlet {
                 for(Event e : attendedEvents) {
                     
                     if(eventKey == e.getId()) {
+                        user.unattendEvent(eventKey);
                         RequestDispatcher dispatcher = request.getRequestDispatcher("eventPage?event=" + eventKey);
                         dispatcher.forward(request, response);
                         return;
                     }
                 }
-            
-                user.attendEvent(eventKey);
                 
             } catch (Exception ex) {
                 Logger.getLogger(AttendEventServlet.class.getName()).log(Level.SEVERE, null, ex);

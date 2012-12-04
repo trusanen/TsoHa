@@ -54,7 +54,18 @@ public class UserQuery extends DatabaseConnection {
     
     public void attendEvent(long userKey, long eventKey) throws SQLException {
         
-        PreparedStatement st = conn.prepareStatement("INSERT INTO Attendees VALUES (?, ?)");
+        PreparedStatement st = conn.prepareStatement("INSERT INTO Attendees (attends, event) VALUES (?, ?)");
+        st.setLong(1, userKey);
+        st.setLong(2, eventKey);
+        
+        st.execute();
+        
+        conn.close();
+    }
+    
+    public void unattendEvent(long userKey, long eventKey) throws SQLException {
+        
+        PreparedStatement st = conn.prepareStatement("DELETE FROM Attendees WHERE attends = ? AND event = ?");
         st.setLong(1, userKey);
         st.setLong(2, eventKey);
         

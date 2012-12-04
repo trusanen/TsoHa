@@ -24,6 +24,10 @@
         <servlet-name>AttendEventServlet</servlet-name>
         <servlet-class>servlets.AttendEventServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UnattendEventServlet</servlet-name>
+        <servlet-class>servlets.UnattendEventServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>AttendEventServlet</servlet-name>
         <url-pattern>/attend</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnattendEventServlet</servlet-name>
+        <url-pattern>/unattend</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
