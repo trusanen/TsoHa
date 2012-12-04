@@ -25,6 +25,9 @@
         <servlet-class>servlets.AttendEventServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UnattendEventServlet</servlet-name>
+        <servlet-class>servlets.UnattendEventServlet</servlet-class>
+    <servlet>
         <servlet-name>CreateEventServlet</servlet-name>
         <servlet-class>servlets.CreateEventServlet</servlet-class>
     </servlet>
@@ -57,6 +60,9 @@
         <url-pattern>/attend</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>UnattendEventServlet</servlet-name>
+        <url-pattern>/unattend</url-pattern>
+    </servlet-mapping>
         <servlet-name>CreateEventServlet</servlet-name>
         <url-pattern>/create</url-pattern>
     </servlet-mapping>

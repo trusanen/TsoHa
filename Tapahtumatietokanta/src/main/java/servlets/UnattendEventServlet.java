@@ -12,7 +12,7 @@ import models.User;
  *
  * @author trusanen
  */
-public class AttendEventServlet extends MainServlet {
+public class UnattendEventServlet extends MainServlet {
 
     /**
      * Handles the HTTP
@@ -28,22 +28,23 @@ public class AttendEventServlet extends MainServlet {
             throws ServletException, IOException {
         
         if(confirmLogin(request, response)) {
+            
+            int eventKey = Integer.parseInt(request.getParameter("event"));
+            
+            HttpSession session = request.getSession(true);
+            User user = (User)session.getAttribute("user");
+            
             try {
-                int eventKey = Integer.parseInt(request.getParameter("event"));
-
-                HttpSession session = request.getSession(true);
-                User user = (User)session.getAttribute("user");
-
-                if(!user.isAttendingEvent(eventKey)) {
-                    user.attendEvent(eventKey);
+                if(user.isAttendingEvent(eventKey)) {
+                    user.unattendEvent(eventKey);
                 }
-                
-                RequestDispatcher dispatcher = request.getRequestDispatcher("eventPage?event=" + eventKey);
-                dispatcher.forward(request, response);
                 
             } catch (Exception ex) {
                 Logger.getLogger(AttendEventServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher("eventPage?event=" + eventKey);
+            dispatcher.forward(request, response);
         }
     }
 
