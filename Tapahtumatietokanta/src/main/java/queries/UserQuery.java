@@ -62,5 +62,4 @@ public class UserQuery extends DatabaseConnection {
         
         conn.close();
     }
-    
 }

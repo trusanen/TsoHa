@@ -45,6 +45,19 @@ public class User {
         (new UserQuery()).attendEvent(id, eventKey);
     }
     
+    public boolean isCreatorOfEvent(long eventKey) throws SQLException, ClassNotFoundException {
+        
+        ArrayList<Event> events = (new EventQuery()).getEventsCreatedByUser(id);
+        
+        for(Event e : events) {
+            if(e.getId() == eventKey) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     public static User loginUser(String name, String password) 
             throws ClassNotFoundException, SQLException {
         
