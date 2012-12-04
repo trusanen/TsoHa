@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -23,15 +22,10 @@ public class EventPageServlet extends MainServlet {
         if(confirmLogin(request, response)) {
             int eventKey = Integer.parseInt(request.getParameter("event"));
             
-            // TÄNNE TARKISTUS, ONKO KÄYTTÄJÄ JO ILMOITTAUTUNUT TAPAHTUMAAN!
-            
             try {
-                EventQuery query = new EventQuery();
-                Event event = query.getEvent(eventKey);
+                Event event = (new EventQuery()).getEvent(eventKey);
                 request.setAttribute("event", event);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EventPageServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(EventPageServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             
