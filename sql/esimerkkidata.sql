@@ -1,6 +1,6 @@
 INSERT INTO Users (userName, password, name) VALUES
 ('Topias', 'uliuli', 'Topias Rusanen'),
-('Ege', 'uliuli', 'Erkki Esimerkki');
+('Erkki', 'uliuli', 'Erkki Esimerkki');
 
 INSERT INTO Events (createdBy, name, information) VALUES
 (1, 'Pussikaljottelu', 'Juodaan kaljaa, ollaan hiljaa'),

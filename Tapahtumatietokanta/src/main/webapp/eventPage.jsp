@@ -14,8 +14,14 @@
             <a href="delete?event=${event.id}">Cancel this event</a>
         </c:if>
         <br><br>${event.information}<br><br>
-        <a href="attend?event=${event.id}">Sign up for this event</a><br>
-        <a href="unattend?event=${event.id}">Cancel your participation</a><br>
+        <c:choose>
+            <c:when test="${user.isAttendingEvent(event.id)}">
+                <a href="unattend?event=${event.id}">Cancel your participation</a><br>
+            </c:when>
+            <c:otherwise>
+                <a href="attend?event=${event.id}">Sign up for this event</a><br>
+            </c:otherwise>
+        </c:choose>
         Attendees:<br>
         <c:choose>
             <c:when test="${empty event.attendees}">

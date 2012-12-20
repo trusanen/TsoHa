@@ -50,7 +50,7 @@ public class UserQuery extends DatabaseConnection {
         
         conn.close();
         return user;
-    } 
+    }
     
     public void createUser(String username, String password, String name) throws SQLException {
         
