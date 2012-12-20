@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import java.sql.Timestamp;
@@ -31,10 +27,7 @@ public class Comment {
     }
     
     public String getTimePosted() {
-        
-        String time = timePosted.toString();
-        
-        return time.substring(0, time.length() - 7);
+        return parseTime(timePosted);
     }
     
     public String getCommentator() {
@@ -43,6 +36,17 @@ public class Comment {
     
     public String getText() {
         return text;
+    }
+    
+    private String parseTime(Timestamp time) {
+        
+        // Parses the time as a string from the SQL timestamp
+        // object. At the moment uses the default string
+        // presentation.
+        
+        String timeString = time.toString();
+        
+        return timeString.substring(0, timeString.length() - 7);
     }
     
 }

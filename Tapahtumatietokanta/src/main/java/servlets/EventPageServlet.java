@@ -21,7 +21,8 @@ public class EventPageServlet extends MainServlet {
             throws ServletException, IOException {
         
         if(confirmLogin(request, response)) {
-            int eventKey = Integer.parseInt(request.getParameter("event"));
+            
+            long eventKey = Long.parseLong(request.getParameter("event"));
             
             try {
                 Event event = (new EventQuery()).getEvent(eventKey);
@@ -50,7 +51,11 @@ public class EventPageServlet extends MainServlet {
         
         if(confirmLogin(request, response)) {
             
-            long eventKey = Integer.parseInt(request.getParameter("event"));
+            // Event information gets stored in the correct encoding
+            // to the database.
+            request.setCharacterEncoding("UTF-8");
+            
+            long eventKey = Long.parseLong(request.getParameter("event"));
             String comment = request.getParameter("comment");
             
             if(!comment.equals("")) {

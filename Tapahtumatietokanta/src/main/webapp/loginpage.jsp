@@ -21,7 +21,7 @@
                 <input type="text" name="un" /><br>
                 <label for="password">Password:</label>
                 <input type="password" name="pw" /><br>
-                <input type="submit" value="Kirjaudu" />
+                <input type="submit" value="Log in" />
             </fieldset>
         </form>
 <%@include file="bottom.jspf" %>

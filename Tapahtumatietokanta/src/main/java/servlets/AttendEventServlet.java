@@ -29,7 +29,7 @@ public class AttendEventServlet extends MainServlet {
         
         if(confirmLogin(request, response)) {
             try {
-                int eventKey = Integer.parseInt(request.getParameter("event"));
+                long eventKey = Long.parseLong(request.getParameter("event"));
 
                 HttpSession session = request.getSession(true);
                 User user = (User)session.getAttribute("user");
