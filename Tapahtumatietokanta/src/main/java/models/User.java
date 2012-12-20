@@ -3,6 +3,7 @@ package models;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
+import queries.CommentQuery;
 import queries.EventQuery;
 import queries.UserQuery;
 
@@ -75,6 +76,11 @@ public class User {
             }
         }
         return false;
+    }
+    
+    public void commentEvent(long eventKey, String comment) throws SQLException, ClassNotFoundException {
+        
+        (new CommentQuery()).createComment(id, eventKey, comment);
     }
     
     public static User loginUser(String name, String password) 

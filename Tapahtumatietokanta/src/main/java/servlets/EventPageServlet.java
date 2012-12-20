@@ -7,6 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import models.Event;
+import models.User;
 import queries.EventQuery;
 
 /**
@@ -20,7 +21,8 @@ public class EventPageServlet extends MainServlet {
             throws ServletException, IOException {
         
         if(confirmLogin(request, response)) {
-            int eventKey = Integer.parseInt(request.getParameter("event"));
+            
+            long eventKey = Long.parseLong(request.getParameter("event"));
             
             try {
                 Event event = (new EventQuery()).getEvent(eventKey);
@@ -46,6 +48,30 @@ public class EventPageServlet extends MainServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        if(confirmLogin(request, response)) {
+            
+            // Event information gets stored in the correct encoding
+            // to the database.
+            request.setCharacterEncoding("UTF-8");
+            
+            long eventKey = Long.parseLong(request.getParameter("event"));
+            String comment = request.getParameter("comment");
+            
+            if(!comment.equals("")) {
+            
+                try {
+
+                    HttpSession session = request.getSession(true);
+                    ((User)session.getAttribute("user")).commentEvent(eventKey, comment);
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(CreateEventServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            response.sendRedirect("eventPage?event=" + eventKey);
+        }
     }
 
 }

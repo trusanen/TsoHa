@@ -49,6 +49,10 @@ public class CreateEventServlet extends MainServlet {
         
         if(confirmLogin(request, response)) {
             
+            // Event information gets stored in the correct encoding
+            // to the database.
+            request.setCharacterEncoding("UTF-8");
+            
             String name = request.getParameter("name");
             String information = request.getParameter("information");
             

@@ -8,20 +8,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Kirjaudu sisään...</title>
+        <title>Please login</title>
     </head>
     <body>
         <c:if test="${errormsg != null}">
-            <p class="virhe">${errormsg}</p>
+            <p class="error">${errormsg}</p>
         </c:if>
         <form id="loginForm" action="login" method="POST">
             <fieldset>
-                <legend>Kirjaudu sisään</legend>
-                <label for="userId">Käyttäjätunnus:</label>
+                <legend>Login</legend>
+                <label for="userId">Username:</label>
                 <input type="text" name="un" /><br>
-                <label for="password">Salasana:</label>
+                <label for="password">Password:</label>
                 <input type="password" name="pw" /><br>
-                <input type="submit" value="Kirjaudu" />
+                <input type="submit" value="Log in" />
             </fieldset>
         </form>
 <%@include file="bottom.jspf" %>

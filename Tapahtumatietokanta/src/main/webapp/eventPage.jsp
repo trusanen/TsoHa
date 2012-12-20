@@ -29,7 +29,14 @@
                 </ul><br>
             </c:otherwise>
         </c:choose><br>
-        Comments:<br>
+        <fieldset>
+        <form id="commentForm" action="eventPage?event=${event.id}" method="POST">
+            
+                <legend>Comment the event:</legend>
+                <input type="text" name="comment" />
+                <input type="submit" value="Post" />
+            
+        </form>
         <c:choose>
             <c:when test="${empty event.comments}">
                 <br>
@@ -37,9 +44,10 @@
             <c:otherwise>
                 <ul>
                     <c:forEach var="comment" items="${event.comments}">
-                        <li>${comment.date}, ${comment.commentator}: ${comment.text}</li>
+                        <li>${comment.timePosted}, ${comment.commentator}: ${comment.text}</li>
                     </c:forEach>
-                </ul><br>
+                </ul>
             </c:otherwise>
         </c:choose>
+        </fieldset>
 <%@include file="bottom.jspf" %>

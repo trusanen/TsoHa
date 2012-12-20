@@ -29,7 +29,7 @@ public class DeleteEventServlet extends MainServlet {
         if(confirmLogin(request, response)) {
             
             try {
-                long eventKey = Integer.parseInt(request.getParameter("event"));
+                long eventKey = Long.parseLong(request.getParameter("event"));
 
                 (new EventQuery()).deleteEvent(eventKey);
                 
