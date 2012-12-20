@@ -2,7 +2,6 @@ package models;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
 import queries.CommentQuery;
 import queries.EventQuery;
 import queries.UserQuery;

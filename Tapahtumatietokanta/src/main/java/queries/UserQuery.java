@@ -52,6 +52,18 @@ public class UserQuery extends DatabaseConnection {
         return user;
     } 
     
+    public void createUser(String username, String password, String name) throws SQLException {
+        
+        PreparedStatement st = conn.prepareStatement("INSERT INTO Users (username, password, name) VALUES (?, ?, ?)");
+        st.setString(1, username);
+        st.setString(2, password);
+        st.setString(3, name);
+        
+        st.execute();
+        
+        conn.close();
+    }
+    
     public void attendEvent(long userKey, long eventKey) throws SQLException {
         
         PreparedStatement st = conn.prepareStatement("INSERT INTO Attendees (attends, event) VALUES (?, ?)");

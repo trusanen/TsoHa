@@ -1,6 +1,6 @@
 <%-- 
-    Document   : kirjautumissivu
-    Created on : 05-Nov-2012, 12:17:46
+    Document   : createUser
+    Created on : 20-Dec-2012, 13:00:25
     Author     : trusanen
 --%>
 
@@ -8,22 +8,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Please login</title>
+        <title>Create a user</title>
     </head>
     <body>
         <c:if test="${errormsg != null}">
             <p class="error">${errormsg}</p>
         </c:if>
-        <form id="loginForm" action="login" method="POST">
+        <form id="loginForm" action="createUser" method="POST">
             <fieldset>
-                <legend>Login</legend>
-                <label for="userId">Username:</label>
+                <legend>Please give all the required information</legend>
+                <label for="name">Name:</label>
+                <input type="text" name="n" /><br>
+                <label for="username">Username:</label>
                 <input type="text" name="un" /><br>
                 <label for="password">Password:</label>
                 <input type="password" name="pw" /><br>
-                <input type="submit" value="Log in" />
+                <input type="submit" value="Submit" />
             </fieldset>
         </form>
-        Don't have an account?<br>
-        <a href="createUser">Click here to register!</a>
 <%@include file="bottom.jspf" %>

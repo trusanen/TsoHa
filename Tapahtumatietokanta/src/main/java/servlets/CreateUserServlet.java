@@ -7,13 +7,13 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import models.User;
+import queries.UserQuery;
 
 /**
  *
  * @author trusanen
  */
-
-public class LoginServlet extends HttpServlet {
+public class CreateUserServlet extends MainServlet {
 
     /**
      * Handles the HTTP
@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        showLoginForm(request, response);
+        showForm(request, response);
     }
 
     /**
@@ -43,17 +43,21 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // User information gets sent correctly to the database.
+        // User information gets stored in the correct encoding
+        // to the database.
         request.setCharacterEncoding("UTF-8");
         
         HttpSession session = request.getSession(true);
         
         String username = request.getParameter("un");
         String password = request.getParameter("pw");
+        String name = request.getParameter("n");
         
-        if(username != null && password != null) {
+        if(!name.equals("") && !username.equals("") && !password.equals("")) {
             
-            try {
+            try {                
+                (new UserQuery()).createUser(username, password, name);
+                        
                 User newUser = User.loginUser(username, password);
 
                 if(newUser != null) {
@@ -61,17 +65,22 @@ public class LoginServlet extends HttpServlet {
                     response.sendRedirect("userPage");
                 }
                 else {
-                    request.setAttribute("errormsg", "Login failed.");
-                    showLoginForm(request, response);
+                    request.setAttribute("errormsg", "Failed to create an account.");
+                    showForm(request, response);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        else {
+            request.setAttribute("errormsg", "Failed to create an account.");
+            showForm(request, response);
+        }
     }
 
-    private void showLoginForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.jsp");
+    private void showForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("createUserPage.jsp");
         dispatcher.forward(request, response);
     }
+
 }

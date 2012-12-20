@@ -51,7 +51,7 @@ public class EventPageServlet extends MainServlet {
         
         if(confirmLogin(request, response)) {
             
-            // Event information gets stored in the correct encoding
+            // Comment information gets stored in the correct encoding
             // to the database.
             request.setCharacterEncoding("UTF-8");
             
