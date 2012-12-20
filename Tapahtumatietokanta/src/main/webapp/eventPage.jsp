@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="top.jspf" %>
         <h1>${event.name}</h1>
-        Event created by ${event.creator}<br>
+        Event created by ${event.creator.name}<br>
         <c:if test="${user.isCreatorOfEvent(event.id)}">
             <a href="delete?event=${event.id}">Cancel this event</a>
         </c:if>

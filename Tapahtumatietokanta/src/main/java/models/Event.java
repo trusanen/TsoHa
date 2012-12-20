@@ -31,9 +31,9 @@ public class Event {
         return name;
     }
     
-    public String getCreator() throws ClassNotFoundException, SQLException {
+    public User getCreator() throws ClassNotFoundException, SQLException {
         
-        return (new UserQuery()).getUser(createdBy).getName();
+        return (new UserQuery()).getUser(createdBy);
     }
     
     public String getInformation() throws ClassNotFoundException, SQLException {

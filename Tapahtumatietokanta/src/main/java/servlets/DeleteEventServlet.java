@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+import models.User;
 import queries.EventQuery;
 
 /**
@@ -29,11 +30,21 @@ public class DeleteEventServlet extends MainServlet {
         if(confirmLogin(request, response)) {
             
             try {
-                long eventKey = Long.parseLong(request.getParameter("event"));
-
-                (new EventQuery()).deleteEvent(eventKey);
+                
+                HttpSession session = request.getSession(true);
+                User user = (User)session.getAttribute("user");
+                
+                if(user != null) {
+                    
+                    long eventKey = Long.parseLong(request.getParameter("event"));
+                
+                    if(user.isCreatorOfEvent(eventKey)) {
+                        (new EventQuery()).deleteEvent(eventKey);
+                    }
+                }
                 
                 response.sendRedirect("userPage");
+                
             } catch (Exception ex) {
                 Logger.getLogger(DeleteEventServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
