@@ -10,18 +10,12 @@
 <%@include file="top.jspf" %>
         <h1>${event.name}</h1>
         Event created by ${event.creator.name}<br>
-        <c:if test="${user.isCreatorOfEvent(event.id)}">
+        <c:if test="${user.id == event.creator.id}">
             <a href="delete?event=${event.id}">Cancel this event</a>
         </c:if>
         <br><br>${event.information}<br><br>
-        <c:choose>
-            <c:when test="${user.isAttendingEvent(event.id)}">
-                <a href="unattend?event=${event.id}">Cancel your participation</a><br>
-            </c:when>
-            <c:otherwise>
-                <a href="attend?event=${event.id}">Sign up for this event</a><br>
-            </c:otherwise>
-        </c:choose>
+        <a href="unattend?event=${event.id}">Cancel your participation</a><br>
+        <a href="attend?event=${event.id}">Sign up for this event</a><br>
         Attendees:<br>
         <c:choose>
             <c:when test="${empty event.attendees}">
